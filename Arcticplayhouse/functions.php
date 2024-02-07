@@ -2,6 +2,16 @@
 define( 'TEMPPATH', get_bloginfo('stylesheet_directory'));
 define( 'IMAGES', TEMPPATH . "/images");
 
+
+
+// Load scripts & styles
+function load_styles_scripts() {
+wp_enqueue_style( 'fonts-genericons', get_template_directory_uri() . '/../../plugins/jetpack/_inc/genericons/genericons/genericons.css', array(), '', 'all' );
+wp_enqueue_style( 'social-logos', get_template_directory_uri() . '/../../plugins/jetpack/_inc/social-logos/social-logos.css', array(), '', 'all' );
+wp_enqueue_script( 'sharing-js', get_template_directory_uri() . '/../../plugins/jetpack/modules/sharedaddy/sharing.js', array( 'jquery' ) );
+}
+add_action( 'wp_enqueue_scripts', 'load_styles_scripts' );
+
 function my_login_url() { 
 	return esc_url( home_url() );
 }
@@ -10,7 +20,7 @@ add_filter('login_headerurl', 'my_login_url' );
 function my_login_logo_url_title()  {
 return 'Arctic Playhouse Theatre';
 }
-add_filter ('login_headertitle', 'my_login_logo_url_title');
+add_filter ('login_headertext', 'my_login_logo_url_title');
 
 $role = get_role('editor'); 
 $role->add_cap('edit_theme_options');
@@ -122,6 +132,7 @@ function menu_fix_on_search_page( $query ) {
 add_filter( 'pre_get_posts', 'menu_fix_on_search_page' );
 
 
+
 // Load admin scripts & styles
 function load_admin_scripts( $hook ) {
 	$post = get_post_type();
@@ -145,10 +156,6 @@ function jptweak_remove_share() {
 } 
 add_action('loop_start', 'jptweak_remove_share' );
 
-// Genericons stylesheet (Jetpack sharing icons not working)
-wp_enqueue_style( 'fonts-genericons', get_template_directory_uri() . '/../../plugins/jetpack/_inc/genericons/genericons/genericons.css', array(), '', 'all' );
-wp_enqueue_style( 'social-logos', get_template_directory_uri() . '/../../plugins/jetpack/_inc/social-logos/social-logos.css', array(), '', 'all' );
-wp_enqueue_script( 'sharing-js', get_template_directory_uri() . '/../../plugins/jetpack/modules/sharedaddy/sharing.js', array( 'jquery' ) );
 
 if ( function_exists( 'register_sidebar' ) ) 
 	{ 

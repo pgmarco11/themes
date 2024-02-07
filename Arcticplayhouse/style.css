@@ -1,14 +1,14 @@
 /*
 Theme Name: Arcticplayhouse
-Theme URI: http://www.shimmertechno.com
+Theme URI: https://www.shimmertechno.com
 Description: A Theatre Theme.
 Version: 1.0
 Author: Peter Giammarco
-Author URI: http://www.pgiammarco.com
+Author URI: https://www.pgiammarco.com
 */
 
 /*
-Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+Eric Meyer's Reset CSS v2.0 (https://meyerweb.com/eric/tools/css/reset/)
 */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -156,7 +156,14 @@ width: 100%;
 
 .logo { max-width: 350px; height: 180px; width:100%; margin-top: 5%; }
 
-#header .p1bottom p { display: block; font-size: 17px; margin: 55px auto 0; position: relative; width: 95%; }
+#header .p1bottom p { 
+    display: block;
+    margin: 1px 0 auto;
+    position: relative;
+    width: 91%;
+    float: right;
+    letter-spacing: .05em;
+}
 #header .searchform { background-color: #fff; bottom: 7px; margin: 0 2% 0; height: auto; position: relative; width: 186%; max-width: 350px;
     position: relative; }
 #header .searchform input { color: #000; font-size: 14px; width: 90%; height: 22px; max-height: 24px; }
@@ -287,7 +294,7 @@ div.wpcf7-response-output { margin: 2em 0.5em 1em 0 !important; }
     width: 106px !important;
     height: 27% !important;
     margin: -54px 0 0 !important;
-    background-image: url('http://www.thearcticplayhouse.com/wp-content/themes/Arcticplayhouse/images/bg_direction_nav.png') !important;
+    background-image: url('https://www.thearcticplayhouse.com/wp-content/themes/Arcticplayhouse/images/bg_direction_nav.png') !important;
 }
 
 .metaslider .caption-wrap {
@@ -297,7 +304,7 @@ div.wpcf7-response-output { margin: 2em 0.5em 1em 0 !important; }
 }
 
 .feat-image { min-height: 400px; max-width: 850px; width: 100%; max-height: 400px; 
-    background-image: url('http://www.thearcticplayhouse.com/wp-content/themes/Arcticplayhouse/images/TAP.jpg');
+    background-image: url('https://www.thearcticplayhouse.com/wp-content/themes/Arcticplayhouse/images/TAP.jpg');
 background-repeat: no-repeat;
 background-size: cover;
 background-position: center center;
@@ -803,7 +810,7 @@ padding: 4px 0 4px 4px !important;
 }
 
 .check {
-    background-image: url(http://www.thearcticplayhouse.com/wp-content/themes/Arcticplayhouse/images/check.png);
+    background-image: url(https://www.thearcticplayhouse.com/wp-content/themes/Arcticplayhouse/images/check.png);
     background-repeat: no-repeat;
     background-position: center center;
 }
@@ -1106,7 +1113,7 @@ padding: 4px 0 4px 4px !important;
 
     #header .topheader { height: auto; padding-top: 10px; }
     #header p { padding-top: 0 !important; }
-    #header p { clear: both; height: auto; margin: 0 auto;  padding-top: 20px; }
+    #header p { clear: both; height: auto; float: none; width: 92%; padding-top: 20px; }
     #index-background { padding-top: 10px; }    
     #shows-wrapper, #single-wrapper { margin-top: 0; }
     #content { margin-top: 0; }

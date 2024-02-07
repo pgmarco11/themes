@@ -283,8 +283,25 @@ get_header();
 				<?php 
 				$category = get_category(11);
 				$category2 = get_category(10);
-				$per_page = $category->category_count;
-				$per_page2 = $category2->category_count;
+
+				// Assuming $category is expected to be an object
+				if (is_object($category)) {
+					$per_page = $category->category_count;
+				} else {
+					// Handle the case where $category is not an object
+					// You might want to set a default value or take appropriate action
+					$per_page = null; // or any other default value
+				}
+
+				if (is_object($category2)) {
+					$per_page2 = $category2->category_count;
+				} else {
+					// Handle the case where $category is not an object
+					// You might want to set a default value or take appropriate action
+					$per_page2 = null; // or any other default value
+				}	
+
+
 				if( ($per_page < 2 && $per_page2 == null) || ($per_page2 < 2 && $per_page == null) ) {
 				?>
 				<article id="event-<?php the_ID(); ?>" <?php post_class(); ?> style="width:100%; padding-right:0;">
@@ -346,11 +363,11 @@ get_header();
 
 				<?php endforeach; ?>	
 						
-						<?php	
+				<?php	
 
-							if($upcomingEvents == null) {
+					if($upcomingEvents == null) {
 
-						?>
+				?>
 				
 					<div id="event-post-none"  class="width100 alignleft">
 							<div class="aligncenter">
@@ -360,15 +377,30 @@ get_header();
 					        </div>
 					</div>											
 
-						<?php } ?>
+				<?php } 
 
-						<?php
 						$pageID = 1032;
 						$page = get_post($pageID);
-						?>
 
-						<a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Shows & Events' ) ) ); ?>#events" title="<?php echo $page->post_title; ?>" class="thecategory">Go To Events</a>
-											
+						$events_page = new WP_Query(array(
+							'post_type' => 'page',
+							'post_status' => 'publish',
+							'name' => 'shows-events' // Replace 'shows-events' with the actual slug of your "Shows & Events" page
+						));
+						
+						if ($events_page->have_posts()) :
+							$events_page->the_post();
+							$events_page_url = get_permalink();
+						?>
+							<a href="<?php echo esc_url($events_page_url); ?>#events" title="<?php echo esc_attr(get_the_title()); ?>" class="thecategory">Go To Events</a>
+						<?php
+							wp_reset_postdata();
+						else :
+							// Handle the case when the page is not found
+							echo 'Page not found';
+						endif;		
+
+					?>											
 
 			</div>
 

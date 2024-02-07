@@ -87,7 +87,7 @@
 						</ul>
 					</nav>
 
-					<p>117 Washington St. West Warwick, RI 02893</p>
+					<p>1249 Main St. West Warwick, RI 02893</p>
 					
 
 				</div>
