@@ -1,1 +1,0 @@
-<?php dynamic_sidebar( 'Past Shows' ); ?>

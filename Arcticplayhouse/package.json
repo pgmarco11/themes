@@ -1,0 +1,16 @@
+{
+  "name": "arcticplayhouse-2024",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "minify-css": "cssnano style.css style.min.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cssnano": "^7.0.5"
+  }
+}

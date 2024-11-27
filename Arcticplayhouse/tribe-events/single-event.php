@@ -20,7 +20,7 @@ $event_id = get_the_ID();
 			</nav>
 		</header>
 
-	<div id="shows-row1" class="widthfull alignleft">
+	<div id="shows-row1" class="widthfull d-flex justify-content-start">
 
 			<h1><?php the_title(); ?></h1>
 
@@ -30,7 +30,7 @@ $event_id = get_the_ID();
 					 $main_menu = array(
 					'theme_location' => 'shows',
 					'container' => 'nav',
-					'container_class' => 'alignleft width100',
+					'container_class' => 'd-flex justify-content-start w-100',
 					'menu_id' => 'shows-col1',
 					'depth' => 0
 					); 
@@ -52,7 +52,7 @@ $event_id = get_the_ID();
 	
 	<?php echo tribe_event_featured_image( $event_id, 'featured-event', false ); ?>
 	
-	<div class="event-info alignleft">
+	<div class="event-info d-flex justify-content-start">
 		<?php the_title( '<h2 class="tribe-events-single-event-title summary entry-title">', '</h2>' ); ?>
 		
 		<div class="tribe-events-schedule updated published tribe-clearfix">

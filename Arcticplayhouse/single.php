@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<section class="m5left m5right">
+<section class="container">
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-	<div id="two-row1" class="width100">
+	<div id="two-row1" class="w-100">
 		<header>
 		<nav class="breadcrumb">
 			<?php if( function_exists( 'bcn_display' ) ) { bcn_display(); } ?>
@@ -17,22 +17,22 @@
 
 	</div>
 
-	<div id="two-row2" class="width100">
+	<div id="two-row2" class="w-100">
 
-		<div id="two-col1" class="alignleft width675 p0left">
+		<div id="two-col1" class="d-flex justify-content-start width675 p0left">
 						
 						<article id="post-<?php the_ID(); ?>" <?php post_class('post-article'); ?>>
 															
 							<div class="content">
-								<div class="alignright post-image"><?php the_post_thumbnail( 'page-featured-image' ); ?></div>
+								<div class="d-flex justify-content-end post-image"><?php the_post_thumbnail( 'page-featured-image' ); ?></div>
 		                        <?php the_content(); ?>							
 								<?php edit_post_link( 'Edit', '<p>', '</p>' ); ?>		
 							</div>
 
 							<nav class="navi clearfix">
 								<ul>
-									<li class="alignleft"><?php previous_post_link(); ?></li>
-									<li class="alignright"><?php next_post_link(); ?></li>
+									<li class="d-flex justify-content-start"><?php previous_post_link(); ?></li>
+									<li class="d-flex justify-content-end"><?php next_post_link(); ?></li>
 								</ul>
 							</nav>
 	
@@ -62,7 +62,7 @@
 
 
 
-		<div id="two-col2" class="alignright width325">
+		<div id="two-col2" class="d-flex justify-content-end width325">
 			<?php get_sidebar('blog-widgets'); ?>
 		</div>
 

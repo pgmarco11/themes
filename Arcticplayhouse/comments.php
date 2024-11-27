@@ -26,8 +26,8 @@
 									number_format_i18n( get_comments_number() ), '&#8220;' . get_the_title() . '&#8221;' ); ?></h3>
 
 	<div class="navigation">
-		<div class="alignleft"><?php previous_comments_link() ?></div>
-		<div class="alignright"><?php next_comments_link() ?></div>
+		<div class="d-flex justify-content-start"><?php previous_comments_link() ?></div>
+		<div class="d-flex justify-content-end"><?php next_comments_link() ?></div>
 	</div>
 
 	<ol class="commentlist">
@@ -35,8 +35,8 @@
 	</ol>
 
 	<div class="navigation">
-		<div class="alignleft"><?php previous_comments_link() ?></div>
-		<div class="alignright"><?php next_comments_link() ?></div>
+		<div class="d-flex justify-content-start"><?php previous_comments_link() ?></div>
+		<div class="d-flex justify-content-end"><?php next_comments_link() ?></div>
 	</div>
  <?php else : // this is displayed if there are no comments so far ?>
 

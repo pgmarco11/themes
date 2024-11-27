@@ -2,7 +2,7 @@
 /* Template Name: Archives */
 get_header(); ?>
 
-<section id="single-wrapper" class="m5left m5right">
+<section id="single-wrapper" class="container">
 
 		<header>
 			<nav class="breadcrumb">
@@ -11,7 +11,7 @@ get_header(); ?>
 		</header>
 
 
-	<div id="single-row1" class="widthfull alignleft">
+	<div class="row widthfull d-flex justify-content-start">
 
 			
 			<h1><?php
@@ -33,14 +33,14 @@ get_header(); ?>
 				 $main_menu = array(
 				'theme_location' => 'shows',
 				'container' => 'nav',
-				'container_class' => 'alignleft width100',
+				'container_class' => 'd-flex justify-content-start w-100',
 				'menu_id' => 'shows-col1',
 				'depth' => 0
 				); 
 
 		wp_nav_menu( $main_menu ); ?>
 	
-	<div id="single-col1">	
+	<div class="col-12">	
 
 		<?php query_posts($query_string."&orderby=date&order=DESC"); ?>
 
@@ -53,11 +53,11 @@ get_header(); ?>
 
 		?>
 	
-				<article id="post-<?php the_ID(); ?>" class="alignleft show-archive width100">
+				<article id="post-<?php the_ID(); ?>" class="d-flex justify-content-start show-archive w-100">
 					
-						<?php the_post_thumbnail('featured-shows', array('class' => 'alignleft'));	?>
+						<?php the_post_thumbnail('featured-shows', array('class' => 'd-flex justify-content-start'));	?>
 					
-						<div class="info alignright">
+						<div class="info d-flex justify-content-end">
 					
 							<h1><a href="<?php the_permalink(); ?>" title="For more info on <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
 							<?php if($writer != null){ ?>
@@ -84,7 +84,7 @@ get_header(); ?>
 			</div>
 
 
-		<div id="two-col2" class="alignright width325">
+		<div class="d-flex justify-content-end">
 			<?php get_sidebar('page-widgets'); ?>
 		</div>
 

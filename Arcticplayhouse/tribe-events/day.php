@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</nav>
 		</header>
 
-	<div id="shows-row1" class="widthfull alignleft">
+	<div id="shows-row1" class="widthfull d-flex justify-content-start">
 
 			<h1>Events</h1>
 
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					 $main_menu = array(
 					'theme_location' => 'shows',
 					'container' => 'nav',
-					'container_class' => 'alignleft width100',
+					'container_class' => 'd-flex justify-content-start w-100',
 					'menu_id' => 'shows-col1',
 					'depth' => 0
 					); 

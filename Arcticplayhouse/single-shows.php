@@ -1,9 +1,14 @@
 <?php get_header(); ?>
 
-<section id="single-wrapper" class="m5left m5right">
-	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+<section id="single-wrapper" class="container">
+	<header class="row mx-2">
+		<nav class="breadcrumb">
+			<?php if( function_exists( 'bcn_display' ) ) { bcn_display(); } ?>
+		</nav>
+	</header>
 
-	<?php
+	<?php 	
+	if ( have_posts() ) : while ( have_posts() ) : the_post(); 
 	
 	$custom = get_post_custom($post->ID);
 	$writer = $custom["writer"][0];
@@ -25,103 +30,62 @@
 	$category = get_the_term_list($post->ID, 'show-type');
 
 	?>
-
-		<header>
-			<nav class="breadcrumb">
-				<?php if( function_exists( 'bcn_display' ) ) { bcn_display(); } ?>
-			</nav>
-		</header>
-
-
-	<div id="single-row1" class="widthfull alignleft">
-
-		
-		<h1><?php the_title(); ?></h1>				
-		
-
-					<?php
-			
-					 $main_menu = array(
-					'theme_location' => 'shows',
-					'container' => 'nav',
-					'container_class' => 'alignleft width100',
-					'menu_id' => 'shows-col1',
-					'depth' => 0
-					); 
-
-					wp_nav_menu( $main_menu ); ?>
-
-
-		<div id="shows-col2">
-						
-						<article>
-															
-						<?php the_post_thumbnail( 'featured-shows', array('class' => 'alignleft mw580')); ?>
-		                
-		                <div class="show-info2 alignright m2right">	
-
+	<div class="widthfull mx-2">
+		<article>
+			<h1><?php the_title(); ?></h1>	
+				<div class="row">
+					<div class="col-lg-4">	
+						<div class="post-thumb">							
+							<?php the_post_thumbnail( 'shows-image', array('class' => 'mb-4')); ?>
+						</div>	
+					</div>		                
+		            <div class="col-lg-8 pl-5 pr-5">
 								<?php if($writer != null){ ?>
-								<p class="p0bottom">Written by: <?php echo $writer; ?> <br/>
+								<p class="pb-0 mb-0">Written by: <?php echo $writer; ?> <br/>
 								<?php } ?>
 								<?php if($director != null){ ?>
-								<p class="p0bottom">Directed by: <?php echo $director; ?></p>
+								<p class="pb-0">Directed by: <?php echo $director; ?></p>
 								<?php } ?>
-
-
 									<p class="address">
 										<?php if($address != null){ echo $address . "<br />"; } ?>
-										<?php if($city != null){ echo $city; } if($city != null){ echo "," . $state . "<br />"; } ?>									
+										<?php if($city != null){ echo $city; } if($city != null){ echo "," . $state . "<br><br>"; } ?>									
 										<?php echo $dates; ?>
 										<?php if($dates2 != null ){ echo '<br />' . $dates2; } ?><br />
 										<?php echo $time; ?><br />									
-									</p><br />	
-
-								<div class="clearfix"></div>
-
+									</p><br />		
 								<?php 	
 
 								if ( $ticket != ""  && strpos($category, 'Show Archives') == false) { ?>
 
 								<p>Price: <?php echo $price ?></p>
 								
-								<?php echo '<a class="alignleft tickets" href="'. $ticket .'" target="_blank" title="buy tickets">Buy Tickets</a>'; ?>	
+								<?php echo '<a class="btn tickets mb-4" href="'. $ticket .'" target="_blank" title="buy tickets">Buy Tickets</a>'; ?>	
 								
-								<div class="clearfix"></div>
 								<?php } ?>									
 
 								<?php if($info != null){echo $info . "<br /><br />"; } ?>
-
 								
 								<?php if ( function_exists( 'sharing_display' ) ) {
 								    sharing_display( '', true );
-								}
-								 
+								}								 
 								if ( class_exists( 'Jetpack_Likes' ) ) {
 								    $custom_likes = new Jetpack_Likes;
 								    echo $custom_likes->post_likes( '' );
 								} ?>	
-
 								<?php the_content(); ?>
-
-						</div>					
-	
-						<?php endwhile; else: ?>
-							<p><?php _e( 'The show you are looking for could not be found.'); ?></p>
-						<?php endif; ?>
-
-						</article>
-
-
-
-		</div>
-
-						<nav class="navi clearfix alignleft m2left links">
-								<ul>
-									<li class="alignleft"><?php previous_post_link(); ?></li>
-									<li class="alignright"><?php next_post_link(); ?></li>
-								</ul>
+					</div>					
+				</div>
+				<?php endwhile; ?>
+						<nav class="w-100 mx-auto">
+							<ul class="m-0 p-0">
+								<li class="float-left my-4"><?php previous_post_link(); ?></li>
+								<li class="float-right my-4"><?php next_post_link(); ?></li>
+							</ul>
 						</nav>	
-
+				<?php else: ?>
+							<p><?php _e( 'The show you are looking for could not be found.'); ?></p>
+				<?php endif; ?>	
+		</article>
 	</div>
 
 </section>
