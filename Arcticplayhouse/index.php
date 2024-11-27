@@ -56,13 +56,15 @@
     </div>
 </section>
 
-<section id="supporters" class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <h2>Supporters</h2>
-            <?php get_template_part('widgets/supporters-widget'); ?>
+<?php if ( is_active_sidebar( 'supporters-widget' ) ) : ?>
+    <section id="supporters" class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2>Supporters</h2>
+                <?php get_template_part('widgets/supporters-widget'); ?>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+<?php endif; ?>
 
 <?php get_footer(); ?>

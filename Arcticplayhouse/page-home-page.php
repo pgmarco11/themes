@@ -29,7 +29,15 @@ get_header();
 				<!-- Slider content -->
 				<div id="slider" class="carousel slide position-relative" data-ride="carousel">
 
-					<?php echo do_shortcode('[metaslider id="2347"]'); ?>
+					<?php 
+
+					$get_main_slides = get_field('homepage_featured_photos');	
+
+					//echo do_shortcode('[metaslider id="1935"]'); 
+
+					echo $get_main_slides;													
+					
+					?>
 
 					<!-- Now playing section -->
 					<div id="now-playing"
@@ -102,16 +110,22 @@ get_header();
 </section>
 
 <section id="index-wrapper" class="container-fluid mt-4">
-		<div class="row">
 
+		<?php $get_show_slides = get_field('homepage_shows'); ?>
+
+		<?php if( !empty($get_show_slides) ): ?>
+		<div class="row">
 			<div class="col-12 slider-wrapper mt-5 mb-4">
 				<div id="slider" class="carousel slide nivoslider" data-ride="carousel">
 					<!-- Indicators -->
-					<?php echo do_shortcode("[metaslider id=1831]");  ?>
+					<?php 
+					echo $get_show_slides;					
+					//echo do_shortcode("[metaslider id=1831]");  					
+					?>					
 				</div>
 			</div>
-
 		</div>
+		<?php endif; ?>
 
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
@@ -187,6 +201,7 @@ get_header();
 		<?php endwhile; endif; ?>
 
 
+		<?php if ( is_active_sidebar( 'supporters-widget' ) ) : ?>
 		<div class="row d-flex justify-content-start">
 
 			<div class="d-flex w-100 align-items-center justify-content-center mt-4 mb-5">
@@ -197,15 +212,15 @@ get_header();
 					class="ml-2 right-img" />
 			</div>
 
-			<div class="col-12 w-100 widget_support d-flex justify-content-start mb-5">
+				<div class="col-12 w-100 widget_support d-flex justify-content-start mb-5">
 
-				<ul id="supporters" class="widthfull mx-auto pl-0">
-					<?php get_template_part('widgets/supporters-widget' ); ?>
-				</ul>
+					<ul id="supporters" class="widthfull mx-auto pl-0">
+						<?php get_template_part('widgets/supporters-widget' ); ?>
+					</ul>
 
-			</div>
-
+				</div>
 		</div>
+		<?php endif; ?>
 </section>
 
 <?php get_footer(); ?>

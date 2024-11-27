@@ -39,7 +39,7 @@ button:focus {
 /* Universal CSS */
 
 /* removes monster insights tag */
-body div.wrap.widthfull > div:last-child {
+.wrap.widthfull > div:last-child {
     display: none;
 }
 /* end removes monster insights tag */
