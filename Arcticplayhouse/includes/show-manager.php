@@ -250,7 +250,6 @@ add_action('init', 'show_manager_register');
 				"cb" => "<input type=\"checkbox\" />",
 				"title" => "Title",
 				"created" => "Created Date",
-				"description" => "Description",
 				"address" => "Address",
 				"dates" => "Show Dates",
 				"time" => "Time",
@@ -272,9 +271,6 @@ add_action('init', 'show_manager_register');
 				case "created":
 					$created = get_the_date();
 					echo $created;
-					break;
-				case "description":
-					the_excerpt();
 					break;
 				case "address":
 					$address= $custom["address"][0] . '<br/>';

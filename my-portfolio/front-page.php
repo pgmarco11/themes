@@ -94,8 +94,7 @@ if ($project_categories && $projects): ?>
                 <div class="project-category">
                     <h3 class="category-title"><?php echo esc_html($category->name); ?></h3>
                     <p class="category-description"><?php echo esc_html($category->description); ?></p>
-                    <button class="slider-arrow left" aria-label="Scroll left">&lt;</button>
-                    <div class="row">
+                    <div class="row">   
                         <?php
 
                         // Filter projects belonging to the current category
@@ -139,8 +138,7 @@ if ($project_categories && $projects): ?>
                             echo '<p>No projects available in this category.</p>';
                         }
                         ?>
-                    </div>
-                    <button class="slider-arrow right" aria-label="Scroll right">&gt;</button>
+                    </div>      
                 </div>          
             <?php endforeach; ?>            
         </div>
@@ -149,77 +147,42 @@ if ($project_categories && $projects): ?>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const sliderRow = document.querySelector('.about-column-section .row');
-  const leftArrow = document.querySelector('.slider-arrow.left');
-  const rightArrow = document.querySelector('.slider-arrow.right');
-  const columns = document.querySelectorAll('.about-column-section .col-md-4');
-  
-  let currentIndex = 0; // Track the currently visible column
+  // About Section
+  const aboutRow = document.querySelector('.about-column-section .row');
+  const leftArrowAbout = document.querySelector('.slider-arrow.left');
+  const rightArrowAbout = document.querySelector('.slider-arrow.right');
+  const aboutColumns = document.querySelectorAll('.about-column-section .col-md-4');
 
-  const updateScrollPosition = () => {
-    // Calculate the scroll position to center the current column
-    const columnWidth = columns[0].offsetWidth; // Assume all columns are the same width
-    const newScrollPosition = currentIndex * columnWidth - (sliderRow.offsetWidth - columnWidth) / 2;
-    sliderRow.scrollTo({ left: newScrollPosition, behavior: 'smooth' });
+  let currentIndexAbout = 0;
+
+  const updateScrollPositionAbout = () => {
+    const columnWidth = aboutColumns[0].offsetWidth;
+    const newScrollPosition = currentIndexAbout * columnWidth - (aboutRow.offsetWidth - columnWidth) / 2;
+    aboutRow.scrollTo({ left: newScrollPosition, behavior: 'smooth' });
   };
 
-  leftArrow.addEventListener('click', () => {
-    if (currentIndex === 0) {
-      currentIndex = columns.length - 1; // Loop to the last column
+  leftArrowAbout.addEventListener('click', () => {
+    if (currentIndexAbout === 0) {
+      currentIndexAbout = aboutColumns.length - 1;
     } else {
-      currentIndex--;
+      currentIndexAbout--;
     }
-    updateScrollPosition();
+    updateScrollPositionAbout();
   });
 
-  rightArrow.addEventListener('click', () => {
-    if (currentIndex === columns.length - 1) {
-      currentIndex = 0; // Loop to the first column
+  rightArrowAbout.addEventListener('click', () => {
+    if (currentIndexAbout === aboutColumns.length - 1) {
+      currentIndexAbout = 0;
     } else {
-      currentIndex++;
+      currentIndexAbout++;
     }
-    updateScrollPosition();
+    updateScrollPositionAbout();
   });
 
-  // Ensure proper layout on window resize
-  window.addEventListener('resize', updateScrollPosition);
+  // Ensure proper layout on window resize for About Section
+  window.addEventListener('resize', updateScrollPositionAbout);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const projectRows = document.querySelectorAll('.project-category .row');
-  const leftArrow = document.querySelector('.slider-arrow.left');
-  const rightArrow = document.querySelector('.slider-arrow.right');
-  const projectCards = document.querySelectorAll('.project-category .col-md-4');
-
-  const updateScrollPosition = () => {
-    // Calculate the scroll position to center the current column
-    const columnWidth = columns[0].offsetWidth; // Assume all columns are the same width
-    const newScrollPosition = currentIndex * columnWidth - (sliderRow.offsetWidth - columnWidth) / 2;
-    sliderRow.scrollTo({ left: newScrollPosition, behavior: 'smooth' });
-  };
-
-  leftArrow.addEventListener('click', () => {
-    if (currentIndex === 0) {
-      currentIndex = columns.length - 1; // Loop to the last column
-    } else {
-      currentIndex--;
-    }
-    updateScrollPosition();
-  });
-
-  rightArrow.addEventListener('click', () => {
-    if (currentIndex === columns.length - 1) {
-      currentIndex = 0; // Loop to the first column
-    } else {
-      currentIndex++;
-    }
-    updateScrollPosition();
-  });
-
-  // Ensure proper layout on window resize
-  window.addEventListener('resize', updateScrollPosition);
-  });
-});
 </script> 
 
 <?php

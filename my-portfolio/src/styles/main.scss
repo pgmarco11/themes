@@ -273,11 +273,13 @@ h1 {
 //Projects section
 .projects-section {   
   background-color: color.scale($tertiary-color, $lightness: 10%);
+  padding-bottom: 1.5rem;
+
   .section-title {
     text-align: center;
     font-size: 4rem;
     text-transform: uppercase;
-    padding: 1.5rem 0;
+    padding: 1.5rem 0;    
   }
   .category-title {
     font-size: 2.1rem;
@@ -285,8 +287,6 @@ h1 {
   }
   .project-category {    
     text-align: center;
-    display: flex;
-    flex-direction: column; 
 
     .project-item {
       margin: 0 auto;
@@ -296,37 +296,29 @@ h1 {
       position: relative;
     }
     .row {
-      display: flex;
       margin: 2rem auto 3.5rem auto;
       padding: 2rem;
-      flex-wrap: nowrap; 
-      overflow-x: auto; /* Allow horizontal scrolling on mobile */
-      scrollbar-width: none; /* Hide scrollbar in Firefox */
-      -ms-overflow-style: none; 
-      background-color: $primary-color;
-      color: $white;
-  
-      &::-webkit-scrollbar {
-        display: none; /* Hide scrollbar in WebKit browsers */
-      }
     }
     .col-md-4 {
-      flex: 0 0 100%; 
+      display: flex;
+      justify-content: space-evenly;
       max-width: 100%;
   
       .project-card {
+        background-color: $primary-color;
+        color: $white;
         justify-items: center;
-        overflow: hidden; // Prevent the image from spilling out during hover effect
-        
+        font-size: 1rem;      
+        line-height: 1.6;      
+        height: auto;    
+        padding: 1rem;  
+        width: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;    
+        @include fadeIn(1s, ease-out);
+      
         .project-image {
-          img {
-              transition: transform .3s ease, box-shadow .3s ease;
-              animation: fadeIn 1s ease-out;
+          img {           
               width:100%;
-
-            &:hover {
-              transform: scale(1.1); // Enlarge the image on hover
-            }
           }  
         }
         .project-title {
@@ -336,49 +328,9 @@ h1 {
         .btn-sm {
           padding: 0 .25rem .5rem;
         }
-      }
-  
-    }  
-  
-    @media (min-width: 768px) {
-      .row {
-        flex-wrap: wrap; 
-        overflow-x: hidden;
-      }
-  
-      .col-md-4 {
-        flex: 0 0 33.333%; 
-        max-width: 33.333%;
-      }
-    }
-    .slider-arrow {
-      position: absolute;
-      bottom: 50%;
-      transform: translateX(-50%);
-      background: none; 
-      border: none; 
-      color: rgba(248, 249, 250, 0.2);
-      font-size: 3.1rem;
-      cursor: pointer;
-      display: none; /* Hidden by default on non-mobile devices */
-      z-index: 10;
-      padding: 0; 
-      transition: color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
-    
-      &:hover {
-        color: rgba(255, 255, 255, 0.9); /* Increase visibility on hover */
-        transform: translateY(-50%) scale(1.1); /* Slightly enlarge on hover */
-      }
-    
-      &:focus {
-        outline: none;
-      }
-    }  
-
-  
-    @media (max-width: 768px) {
-      .slider-arrow {
-        display: block; 
+        &:hover{
+          transform:scale(1.1);
+          }
       }
     }
   }
