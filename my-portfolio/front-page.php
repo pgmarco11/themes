@@ -110,14 +110,15 @@ if ($project_categories && $projects): ?>
                             });
 
                             // Limit to top 3 projects
-                            $projects_in_category = array_slice($projects_in_category, 0, 3);
+                            $projects_in_category = array_slice($projects_in_category, 0, 3);                            
 
                             // Loop through the top 3 projects
                             foreach ($projects_in_category as $project):
                                 $featured_image = get_the_post_thumbnail_url($project->ID, 'medium_large');
-                                $excerpt = get_the_excerpt($project->ID);
+                                $excerpt = get_the_excerpt($project->ID);                               
+                             
                         ?>
-                                <div class="col-md-4 project-item">
+                                <div class="<?= (count($projects_in_category) < 3) ? 'col-md-6' : 'col-md-4'; ?> project-item">
                                     <div class="project-card">
                                         <?php if ($featured_image): ?>
                                             <div class="project-image">
@@ -131,7 +132,7 @@ if ($project_categories && $projects): ?>
                                         <a href="<?php echo get_permalink($project->ID); ?>" class="btn btn-sm btn-link">Read More</a>
                                     </div>
                                 </div>
-                        <?php
+                        <?php                            
                             endforeach;
                         } else {
                             // Display a message if no projects are in this category

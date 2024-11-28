@@ -298,12 +298,12 @@ h1 {
     .row {
       margin: 2rem auto 3.5rem auto;
       padding: 2rem;
-    }
+    } 
+    .col-md-6,
     .col-md-4 {
       display: flex;
       justify-content: space-evenly;
-      max-width: 100%;
-  
+   
       .project-card {
         background-color: $primary-color;
         color: $white;
