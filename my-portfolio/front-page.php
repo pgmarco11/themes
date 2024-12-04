@@ -15,15 +15,15 @@ $button_text = get_field('button_text');
 $video_url = get_field('background_video');
 ?>
 
-<!-- Hero Section (Video Background) -->
-<section id="hero" class="hero-section d-flex align-items-center justify-content-center text-center" >
-    <?php if ($video_url): ?>
-        <video class="hero-background-video" autoplay loop muted>
-            <source src="<?php echo esc_url($video_url); ?>" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    <?php endif; ?>
+<?php if ($video_url): ?>
+    <video class="site-background-video" autoplay loop muted>
+        <source src="<?php echo esc_url($video_url); ?>" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+<?php endif; ?>
 
+<!-- Hero Section -->
+<section id="hero" class="hero-section d-flex align-items-center justify-content-center text-center">
     <div class="hero-content">
         <h1 class="hero-tagline"><?php echo esc_html($tagline); ?></h1>
         <a href="<?php echo esc_url($button_link); ?>" class="btn btn-md btn-link hero-cta"><?php echo esc_html($button_text); ?></a>
@@ -37,10 +37,10 @@ $video_url = get_field('background_video');
  $column_3_icon = get_field('column_3_icon');
  
  ?>
-<section class="about-column-section container-fluid">
-    <div class="container">
+<section id="About" class="about-column-section container-fluid my-0">
+    <div class="container py-5">
         <button class="slider-arrow left" aria-label="Scroll left">&lt;</button>
-        <div class="row">
+        <div class="row py-4">
             <div class="col-md-4 text-center">
                 <div class="content">
                     <?php if($column_1_icon): ?>
@@ -82,13 +82,13 @@ $project_categories = get_terms([
     'taxonomy' => 'category',
     'hide_empty' => true,
 ]);
-
 $projects = get_field('my_project'); // ACF relationship field
 
-if ($project_categories && $projects): ?>
-    <section id="projects" class="projects-section container-fluid">
-        <div class="container">
-        
+?>
+<section id="Projects" class="projects-section container-fluid">
+    <div class="container">
+        <?php 
+        if ($project_categories && $projects): ?>        
             <h2 class="section-title">Projects</h2>
             <?php foreach ($project_categories as $category): ?>                
                 <div class="project-category">
@@ -118,7 +118,7 @@ if ($project_categories && $projects): ?>
                                 $excerpt = get_the_excerpt($project->ID);                               
                              
                         ?>
-                                <div class="<?= (count($projects_in_category) < 3) ? 'col-md-6' : 'col-md-4'; ?> project-item">
+                                <div class="<?= (count($projects_in_category) === 3) ? 'col-md-12 col-lg-4' : 'col-sm-12 col-md-6'; ?> project-item mb-4">
                                     <div class="project-card">
                                         <?php if ($featured_image): ?>
                                             <div class="project-image">
@@ -141,10 +141,33 @@ if ($project_categories && $projects): ?>
                         ?>
                     </div>      
                 </div>          
-            <?php endforeach; ?>            
+            <?php  endforeach; ?>
+        <?php endif; ?> 
+    </div>
+</section>
+
+<section id="Contact" class="contact-section container-fluid">
+    <div class="container">
+        <div class="row w-100 py-5">
+        <?php 
+            if ( have_posts() ) : while ( have_posts() ) : the_post(); 
+
+            the_content();  
+
+            endwhile;
+            else :
+                echo '<p>No content found</p>';
+            endif;
+        ?>
         </div>
-    </section>
-<?php endif; ?>
+    </div>
+</section>
+
+<?php 
+
+get_footer(); 
+
+?>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -185,16 +208,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script> 
-
-<?php
-
-if ( have_posts() ) :
-    while ( have_posts() ) : the_post();
-        // Display the post content
-        the_content();
-    endwhile;
-else :
-    echo '<p>No content found</p>';
-endif;
-
-get_footer(); 

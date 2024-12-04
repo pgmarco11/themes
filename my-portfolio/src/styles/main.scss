@@ -32,12 +32,29 @@ $metal-shadow: inset 0 1px 3px rgba(0,0,0,.15),inset 0 -1px 2px rgba(0,0,0,.2),0
   }
 }
 body {
+  position: relative;
+  overflow-x: hidden; /* Prevent horizontal scrolling if the video overflows */
   background-color: $primary-color;
   color: $white;
+  
+  .is-layout-flex {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .site-background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Place it behind all other content */
+  }
+  h1 {
+    color: $primary-color;
+  }
 }
-h1 {
-  color: $primary-color;
-}
+
 // Main Menu
 #menu-main {
   padding: 0;
@@ -62,11 +79,14 @@ h1 {
   }
 }
 
-//Header Section
-.my-header {
+//Header & Footer Section
+.my-header, 
+.my-footer {
   position: relative;
-  background-color: rgba(52, 58, 64, 0.8); // Semi-transparent background
   z-index: 1; // Ensure it sits above the triangle
+}
+.my-header {
+  background-color: rgba(52, 58, 64, 0.8); // Semi-transparent background
 }
 .my-header-triangle {
     position: relative;
@@ -79,9 +99,28 @@ h1 {
       width: 100%;
       height: 100px;
       background-color: rgba(52, 58, 64, 0.8);
-      clip-path: polygon(0 0, 100% 50%, 0 -1000000%);
+      clip-path: polygon(0 0, 100% 60%, 0 -1000000%);
       z-index: 1;
     }
+}
+.my-footer {
+  background-color: rgba(69, 78, 91, 0.8); // Semi-transparent background
+}
+.my-footer-triangle {
+  background-color: rgba(color.adjust($primary-color), 0.25);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(69, 78, 91, 0.75);
+    clip-path: polygon(-1000000% 0, 100% 101%, 0 0);
+    z-index: 1;
+  }
 }
 
 //Homepage Hero section
@@ -125,10 +164,9 @@ h1 {
 
 // About Section
 .about-column-section {
-  margin: 0 auto;
-  background-color: $primary-color;
+  margin: 0 auto;  
+  background-color: rgba(color.adjust($primary-color), 0.25);
   color: $white;
-  margin-bottom: 3.5rem;
 
   .icon {
     color: $hover-blue-light;
@@ -186,7 +224,6 @@ h1 {
   }
   .row {
     display: flex;
-    margin-top: 2rem;
     flex-wrap: nowrap; 
     overflow-x: auto; /* Allow horizontal scrolling on mobile */
     scrollbar-width: none; /* Hide scrollbar in Firefox */
@@ -272,7 +309,7 @@ h1 {
 
 //Projects section
 .projects-section {   
-  background-color: color.scale($tertiary-color, $lightness: 10%);
+  background-color: rgba(color.adjust($tertiary-color, $lightness: 10%), 0.25);
   padding-bottom: 1.5rem;
 
   .section-title {
@@ -299,8 +336,10 @@ h1 {
       margin: 2rem auto 3.5rem auto;
       padding: 2rem;
     } 
+    .col-lg-4,
     .col-md-6,
-    .col-md-4 {
+    .col-md-12
+    .col-sm-12{
       display: flex;
       justify-content: space-evenly;
    
@@ -310,13 +349,19 @@ h1 {
         justify-items: center;
         font-size: 1rem;      
         line-height: 1.6;      
-        height: auto;    
-        padding: 1rem;  
+        height: auto;   
+        border-radius: 10px; 
+        padding: 0.85rem;  
         width: 100%;
         transition: transform 0.3s ease, box-shadow 0.3s ease;    
         @include fadeIn(1s, ease-out);
       
         .project-image {
+          padding: 1.25rem;
+          max-width: 350px;
+          height: auto;
+          margin: 0 auto;
+
           img {           
               width:100%;
           }  
@@ -332,6 +377,42 @@ h1 {
           transform:scale(1.1);
           }
       }
+    }
+  }
+}
+.contact-section{
+  background-color: rgba(color.adjust($primary-color), 0.25);
+  color: $white;
+
+  .row {
+    flex-direction: column;
+    display: flex;  
+
+    .wp-block-group div.nf-form-cont {
+      width: 50%;
+    }
+
+    @media(max-width: 800px){
+      .wp-block-group div.nf-form-cont {
+        width: 100%;
+      }
+    }
+  }
+  .label-above .field-wrap, .label-below .field-wrap {
+    flex-flow: nowrap;
+    .nf-field-label {
+      padding-right: 1rem;
+    }
+  }
+  .nf-form-content input[type=submit] {
+    float: right;
+    text-decoration: none;
+    background: $metal-button-bg;
+    border-radius: .25rem;
+
+    &:hover {
+      text-decoration: none;
+      background: $metal-button-bg;
     }
   }
 }
