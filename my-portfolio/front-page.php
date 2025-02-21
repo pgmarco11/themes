@@ -25,8 +25,8 @@ $video_url = get_field('background_video');
 <!-- Hero Section -->
 <section id="hero" class="hero-section d-flex align-items-center justify-content-center text-center">
     <div class="hero-content">
-        <h1 class="hero-tagline"><?php echo esc_html($tagline); ?></h1>
-        <a href="<?php echo esc_url($button_link); ?>" class="btn btn-md btn-link hero-cta"><?php echo esc_html($button_text); ?></a>
+        <h1 class="hero-tagline"><?php echo htmlspecialchars_decode($tagline); ?></h1>
+        <a href="<?php echo esc_url($button_link); ?>" class="btn btn-md btn-link hero-cta"><?php echo esc_html($button_text); ?> <i class="fas fa-angles-right"></i></a>
     </div>
 </section>
 
@@ -34,8 +34,7 @@ $video_url = get_field('background_video');
  <?php
  $column_1_icon = get_field('column_1_icon');
  $column_2_icon = get_field('column_2_icon');
- $column_3_icon = get_field('column_3_icon');
- 
+ $column_3_icon = get_field('column_3_icon'); 
  ?>
 <section id="About" class="about-column-section container-fluid my-0">
     <div class="container py-5">
@@ -84,7 +83,7 @@ $project_categories = get_terms([
 ]);
 $projects = get_field('my_project'); // ACF relationship field
 
-$desired_order = ['websites', 'wp-plugins', 'react-apps']; 
+$desired_order = ['websites', 'wordpress-plugins', 'react-apps']; 
 
 // Sort the categories based on the desired order
 usort($project_categories, function ($a, $b) use ($desired_order) {
@@ -116,7 +115,6 @@ usort($project_categories, function ($a, $b) use ($desired_order) {
                             $project_categories = wp_get_post_terms($project->ID, 'category', ['fields' => 'ids']);
                             return in_array($category->term_id, $project_categories);
                         });
-
                                     
                         if ($projects_in_category) {
                             // Sort projects by date (newest first)
@@ -144,14 +142,14 @@ usort($project_categories, function ($a, $b) use ($desired_order) {
                                                     <img src="<?php echo esc_url($featured_image); ?>" alt="<?php echo esc_attr($project->post_title); ?>">
                                                 </a>
                                             </div>
-                                        <?php endif; ?>
-                                        <a href="<?php echo get_permalink($project->ID); ?>"`>
-                                            <h4 class="project-title"><?php echo esc_html($project->post_title); ?></h4>
-                                        </a>                                     
+                                        <?php endif; ?>                                        
+                                        <h4 class="project-title">
+                                            <a href="<?php echo get_permalink($project->ID); ?>"`><?php echo esc_html($project->post_title); ?></a> 
+                                        </h4>                                                                            
                                         <?php if($project_description): ?>
                                         <p class="project-excerpt"><?php echo esc_html($project_description); ?></p>
                                         <?php endif; ?>
-                                        <a href="<?php echo get_permalink($project->ID); ?>" class="btn btn-sm btn-link">Read More</a>
+                                        <a href="<?php echo get_permalink($project->ID); ?>" class="btn btn-sm btn-link">Read More <i class="fas fa-angles-right"></i></a>
                                     </div>
                                 </div>
                         <?php                            
@@ -200,33 +198,65 @@ document.addEventListener('DOMContentLoaded', () => {
   const aboutColumns = document.querySelectorAll('.about-column-section .col-md-4');
 
   let currentIndexAbout = 0;
+  let startX = 0;
+  let isSwiping = false;
 
   const updateScrollPositionAbout = () => {
     const columnWidth = aboutColumns[0].offsetWidth;
-    const newScrollPosition = currentIndexAbout * columnWidth - (aboutRow.offsetWidth - columnWidth) / 2;
+    const newScrollPosition = currentIndexAbout * columnWidth;
     aboutRow.scrollTo({ left: newScrollPosition, behavior: 'smooth' });
   };
 
-  leftArrowAbout.addEventListener('click', () => {
-    if (currentIndexAbout === 0) {
-      currentIndexAbout = aboutColumns.length - 1;
-    } else {
-      currentIndexAbout--;
+  const updateIndexAbout = (direction) => {
+    if (direction === 'left') {
+      currentIndexAbout = (currentIndexAbout === 0) ? aboutColumns.length - 1 : currentIndexAbout - 1;
+    } else if (direction === 'right') {
+      currentIndexAbout = (currentIndexAbout === aboutColumns.length - 1) ? 0 : currentIndexAbout + 1;
     }
     updateScrollPositionAbout();
-  });
+  };
 
-  rightArrowAbout.addEventListener('click', () => {
-    if (currentIndexAbout === aboutColumns.length - 1) {
-      currentIndexAbout = 0;
-    } else {
-      currentIndexAbout++;
+  leftArrowAbout.addEventListener('click', () => updateIndexAbout('left'));
+
+  rightArrowAbout.addEventListener('click', () => updateIndexAbout('right'));
+
+  // Swipe (drag) functionality
+  const onTouchStart = (e) => {
+    isSwiping = true;
+    startX = e.touches ? e.touches[0].clientX : e.clientX;
+  };
+
+  const onTouchMove = (e) => {
+    if (!isSwiping) return;
+
+    const currentX = e.touches ? e.touches[0].clientX : e.clientX;
+    const diffX = startX - currentX;
+
+    if (diffX > 50) {
+      // Swipe left
+      updateIndexAbout('right');
+      isSwiping = false; // Stop swiping after action
+    } else if (diffX < -50) {
+      // Swipe right
+      updateIndexAbout('left');
+      isSwiping = false; // Stop swiping after action
     }
-    updateScrollPositionAbout();
-  });
+  };
+
+  const onTouchEnd = () => {
+    isSwiping = false;
+  };
+
+  aboutRow.addEventListener('mousedown', onTouchStart);
+  aboutRow.addEventListener('touchstart', onTouchStart);
+
+  aboutRow.addEventListener('mousemove', onTouchMove);
+  aboutRow.addEventListener('touchmove', onTouchMove);
+
+  aboutRow.addEventListener('mouseup', onTouchEnd);
+  aboutRow.addEventListener('touchend', onTouchEnd);
 
   // Ensure proper layout on window resize for About Section
   window.addEventListener('resize', updateScrollPositionAbout);
 });
-
-</script> 
+</script>

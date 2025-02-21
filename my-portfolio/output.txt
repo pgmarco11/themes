@@ -1,0 +1,19 @@
+Folder PATH listing for volume Windows
+Volume serial number is 4A65-0446
+C:\WAMP64\WWW\MY-PORTFOLIO\WP-CONTENT\THEMES\MY-PORTFOLIO\DIST
++---css
+\---js
+Folder PATH listing for volume Windows
+Volume serial number is 4A65-0446
+C:\WAMP64\WWW\MY-PORTFOLIO\WP-CONTENT\THEMES\MY-PORTFOLIO\SRC
++---assets
++---filters
++---functions
++---scripts
++---styles
+\---templates
+Folder PATH listing for volume Windows
+Volume serial number is 4A65-0446
+C:\WAMP64\WWW\MY-PORTFOLIO\WP-CONTENT\THEMES\MY-PORTFOLIO\TRIBE-EVENTS
+No subfolders exist 
+

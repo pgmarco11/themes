@@ -1,6 +1,7 @@
 // Colors and Mixins
 @use 'sass:color';
 @use "Projects";
+@use "Events";
 
 $primary-color: #343a40;
 $secondary-color: #a1d4eb;
@@ -21,8 +22,6 @@ $metal-button-bg: linear-gradient(
 );
 $metal-shadow: inset 0 1px 3px rgba(0,0,0,.15),inset 0 -1px 2px rgba(0,0,0,.2),0 0 2px rgba(0,0,0,.4);
 
-
-
 @mixin fadeIn($duration: 0.8s, $timing-function: ease-in-out) {
   animation: fadeIn $duration $timing-function;
 
@@ -37,13 +36,34 @@ $metal-shadow: inset 0 1px 3px rgba(0,0,0,.15),inset 0 -1px 2px rgba(0,0,0,.2),0
       }
   }
 }
+html, body {
+  height: auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+html {
+  scroll-padding-top: 100px;
+}
 
 body {
   position: relative;
-  overflow-x: hidden; /* Prevent horizontal scrolling if the video overflows */
+  overflow-x: hidden; 
   background-color: $primary-color;
   color: $white;
-  
+  top: 100px;
+
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    flex-shrink: 0;
+  }
+  main {
+    flex: 1; 
+    padding-top: 80px;
+  }  
   .is-layout-flex {
     margin: 0 auto;
     width: 100%;
@@ -60,12 +80,33 @@ body {
   h1 {
     color: $primary-color;
   }
+  .btn.btn-link {
+      outline: none; 
+      &:focus {
+        outline: none; 
+        box-shadow: none; 
+      }
+      &:active {
+        outline: none; 
+        box-shadow: none;   
+      }
+  }
+  .wp-block-code {
+    code {
+      color: $white;
+    }
+  }
   .btn-outline-secondary {
     color: #a1d4eb;
     border-color: #a1d4eb;
   }
+  &.single footer {
+    margin-top: 8rem;
+  }
+  footer {
+    flex-shrink: 0;
+  }
 }
-
 // Main Menu
 #menu-main {
   padding: 0;
@@ -73,11 +114,11 @@ body {
   list-style: none;
 
   > li {
-    flex: 1; // Distribute menu items evenly
+    flex: 1; 
     text-align: center;
 
     > a {
-      display: block; // Make the anchor take up full width
+      display: block; 
       letter-spacing: .05rem;
       padding: 10px 15px;
       text-decoration: none;
@@ -88,9 +129,8 @@ body {
         color: $hover-blue-light;
       }
     }
-  }
+  } 
 }
-
 //Header & Footer Section
 .my-header, 
 .my-footer {
@@ -99,6 +139,17 @@ body {
 }
 .my-header {
   background-color: rgba(52, 58, 64, 0.8); // Semi-transparent background
+  padding-left: 2px;
+
+  .navbar.navbar-expand-lg{
+    text-align: right;
+    display: block;
+
+    .navbar-toggler {
+      background-color: rgba(255, 255, 255, .1);
+      border-color: rgba(255, 255, 255, .4);
+    }
+  }
 }
 .my-header-triangle {
     position: relative;
@@ -115,8 +166,16 @@ body {
       z-index: 1;
     }
 }
+.single  .my-header {
+  background-color: rgb(69,78,91) !important; 
+}
+.single .my-header-triangle {
+    &::after {
+      background-color: rgb(69,78,91) !important; 
+    }
+}
 .my-footer {
-  background-color: rgba(69, 78, 91, 0.8); // Semi-transparent background
+  background-color: rgba(69, 78, 91, 0.8); 
 }
 .my-footer-triangle {
   background-color: rgba(color.adjust($primary-color), 0.25);
@@ -153,7 +212,7 @@ body {
     z-index: 1; /* Ensure the content stays above the video */
 
       .hero-tagline {
-          font-size: 3rem;
+          font-size: 2.9rem;
           font-weight: bold;
           color: $white;
       }
@@ -165,6 +224,9 @@ body {
           text-decoration: none;
           background: $metal-button-bg;
 
+          i.fas.fa-angles-right {
+            font-size: 1rem;
+          }
           &:hover {
               text-decoration: none;  
               color: $dark-blue;
@@ -230,19 +292,18 @@ body {
     line-height: 1.6;
     margin-bottom: 1rem;
   }
-
   .container {
     position: relative;
   }
   .row {
     display: flex;
     flex-wrap: nowrap; 
-    overflow-x: auto; /* Allow horizontal scrolling on mobile */
-    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    overflow-x: auto; 
+    scrollbar-width: none;
     -ms-overflow-style: none; 
 
     &::-webkit-scrollbar {
-      display: none; /* Hide scrollbar in WebKit browsers */
+      display: none;
     }
   }
   .col-md-4 {
@@ -265,7 +326,6 @@ body {
         outline-offset: 4px;
       }
     }
-
   }  
 
   @media (min-width: 768px) {
@@ -326,7 +386,7 @@ body {
 
   .section-title {
     text-align: center;
-    font-size: 4rem;
+    font-size: 2.8rem;
     text-transform: uppercase;
     padding: 1.5rem 0;    
   }
@@ -339,6 +399,7 @@ body {
 
     .project-item {
       margin: 0 auto;
+      padding: 0;
     }
 
     .container {
@@ -346,7 +407,7 @@ body {
     }
     .row {
       margin: 2rem auto 3.5rem auto;
-      padding: 2rem;
+      padding: 2rem 0;
     } 
     .col-lg-4,
     .col-md-6,
@@ -365,7 +426,7 @@ body {
         border-radius: 10px; 
         padding: 0.85rem;  
         width: 100%;
-        margin: 10px;
+        margin: 18px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;    
         @include fadeIn(1s, ease-out);
       
@@ -377,30 +438,43 @@ body {
 
           img {           
               width:100%;
+              background-color: $white;
+              padding: .5rem;
+              border-radius: 10px;
           }  
         }
         .project-title {
           padding: .25rem 0;
-          width: 100%;
-
-          &:hover{
-            color: $dark-blue;
-          }
+          width: 100%;     
         }
         .btn-sm {
           padding: 0 .25rem .5rem;
         }
+        .project-excerpt + a.btn-link {
+          font-size: 1.35rem;
+        }  
         a {
           color: $light-blue;
           text-decoration: none;
-          h4{
-            color: $white;
-            font-weight: 700;
-            letter-spacing: .05rem
+
+          i.fas.fa-angles-right {
+            font-size: 1rem;
           }
           &:hover{
             color: $hover-blue-light;
           }
+        }
+        h4{
+          font-weight: 700;
+          letter-spacing: .05rem;
+
+          a {
+            color: $white;
+
+            &:hover{
+              color: $dark-blue;
+            }
+          } 
         }
         &:hover{
           transform:scale(1.1);
@@ -427,11 +501,18 @@ body {
       }
     }
   }
-  .label-above .field-wrap, .label-below .field-wrap {
-    flex-flow: nowrap;
-    .nf-field-label {
-      padding-right: 1rem;
+  @media(min-width: 912px){
+    .label-above .field-wrap, .label-below .field-wrap {
+      flex-flow: nowrap;
+      .nf-field-label {
+        padding-right: 1rem;
+      }
     }
+  }
+  .nf-form-content input:not([type=button]),
+  .nf-form-content input:not([type=button]):focus,
+  .nf-form-content textarea{
+    color: $white;
   }
   .nf-form-content input[type=submit] {
     float: right;
@@ -442,6 +523,7 @@ body {
     &:hover {
       text-decoration: none;
       background: $metal-button-bg;
+      color: $dark-blue;
     }
   }
 }

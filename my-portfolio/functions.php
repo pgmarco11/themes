@@ -84,6 +84,15 @@ function my_theme_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
 
+function add_defer_to_jquery( $tag, $handle ) {
+    if ( 'jquery' !== $handle ) {
+        return $tag;
+    }
+
+    return str_replace( ' src', ' defer="defer" src', $tag );
+}
+add_filter( 'script_loader_tag', 'add_defer_to_jquery', 10, 2 );
+
 // Enqueue Swiper.js in WordPress
 function enqueue_slider_scripts() {
     wp_enqueue_style('swiper-style', 'https://unpkg.com/swiper/swiper-bundle.min.css');

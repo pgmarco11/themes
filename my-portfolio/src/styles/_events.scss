@@ -1,0 +1,23 @@
+// Colors and Mixins
+@use 'sass:color';
+
+$white: #f8f9fa;
+
+.tribe_events-template-default.single {
+  #tribe-events {
+    margin: 0 auto;
+  }
+  .tribe-events-single {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+.post-type-archive-tribe_events {
+  .tribe-events.tribe-events-view {
+    margin: 8rem 0 10rem;
+  }
+  .tribe-common-l-container.tribe-events-l-container {
+    background-color: $white;
+    margin: 0 auto;
+  }
+}

@@ -3,25 +3,26 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
 
   return {
-    entry: './src/index.js', // Change this to your main JS entry point
+    entry: './src/index.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: isDevelopment ? 'bundle.js' : 'js/[name].[contenthash].js', // Use contenthash for cache busting in production
+      filename: isDevelopment ? 'bundle.js' : 'js/[name].[contenthash].js',
     },
-    devtool: isDevelopment ? 'inline-source-map' : false, // Sourcemaps for development only
+    devtool: isDevelopment ? 'inline-source-map' : false,
     devServer: {
       static: {
-        directory: path.join(__dirname, 'dist'), // Set the directory for static files
-        watch: true, // Watch for changes to files in the 'dist' folder
+        directory: path.join(__dirname, 'dist'),
+        watch: true,
       },
-      hot: true, // Enable Hot Module Replacement
-      open: true, // Automatically open the browser
-      port: 3000, // Port for the server
+      hot: true,
+      open: true,
+      port: 3000,
     },
     module: {
       rules: [
@@ -38,44 +39,41 @@ module.exports = (env, argv) => {
         {
           test: /\.scss$/,
           use: [
-            isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader, // Use style-loader in dev and mini-css-extract-plugin in prod
+            isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
             'css-loader',
             'sass-loader',
           ],
         },
         {
           test: /\.(html)$/,
-          use: ['html-loader'], // If you have HTML files to be processed
+          use: ['html-loader'],
         },
       ],
     },
+    optimization: {
+      minimizer: [
+        `...`, // Extends default minimizers (terser-webpack-plugin for JS)
+        new CssMinimizerPlugin(), // Uses cssnano to optimize CSS
+      ],
+    },
     plugins: [
-      new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: ['**/*'], // Keeps the 'css' folder intact
-      }), // Clean dist folder before each build, except for the 'css' folder
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: './src/index.html', // Path to your HTML template
-        filename: 'index.html', // Output HTML file
+        template: './src/index.html',
+        filename: 'index.html',
       }),
       new MiniCssExtractPlugin({
-        filename: isDevelopment ? 'css/[name].css' : 'css/[name].[contenthash].css', // Output CSS filename
+        filename: isDevelopment ? 'css/[name].css' : 'css/[name].[contenthash].css',
       }),
       new WebpackManifestPlugin({
-        fileName: 'manifest.json', // Manifest file output
-        publicPath: '', 
+        fileName: 'manifest.json',
+        publicPath: '',
         generate: (seed, files) => {
-          const manifest = files.reduce((acc, file) => {
-            const name = file.name;
-            if (name.endsWith('.js')) {
-              acc['main.js'] = file.path;
-            }
-            if (name.endsWith('.css')) {
-              acc['main.css'] = file.path;
-            }
+          return files.reduce((acc, file) => {
+            if (file.name.endsWith('.js')) acc['main.js'] = file.path;
+            if (file.name.endsWith('.css')) acc['main.css'] = file.path;
             return acc;
           }, seed);
-
-          return manifest;
         },
       }),
     ],

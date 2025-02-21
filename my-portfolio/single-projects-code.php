@@ -3,58 +3,6 @@
 * Template Name: Plugin and React Projects
 * Template Post Type: projects
 */
-?>
-<style>
-.image-modal {
-    margin:0 auto;
-    width: 90%;
-}
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto; /* Allow vertical scrolling within the modal */
-    background-color: rgba(0, 0, 0, 0.8); /* Transparent dark background */
-}
-body.modal-open {
-    overflow: hidden;
-}
-
-.modal-content {
-    max-width: max-content;
-    max-height: 90%;
-    margin: 2.5rem auto 5rem auto;
-    overflow-y: auto;
-    display: block;  
-    height: auto;
-    max-height: calc(100% - 10rem); /* Adjust height to ensure it fits within the viewport */
-    object-fit: contain; /* Ensure image fits within its container */
-    width: 95% !important;
-    border:4px solid rgba(0,0,0,.6) !important;
-    background-color: rgba(0,0,0,.2) !important;
-}
-
-.close {
-    top: 0;
-    right: 35px;
-    color: #f1f1f1 !important;
-    font-size: 40px !important;
-    transition: 0.3s;
-    z-index: 1001; /* Ensure it appears above the modal content */
-}
-
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-</style>
-<?php
 
 get_header();
 
@@ -66,7 +14,7 @@ if ( have_posts() ) :
 
         <div class="row project-container container-fluid">
 
-            <div class="col-lg-12 project-content p-5">
+            <div class="col-lg-12 project-content p-5 mt-5">
                 <?php 
                 $website_url = get_field('website_url'); 
                 $github_link = get_field('github_link');
@@ -85,12 +33,13 @@ if ( have_posts() ) :
 
                 <?php if($website_url) : ?>
                     <h5>Website link:</h5>
-                    <a href="<?= $website_url; ?>" title="<?= $title_url; ?>"><?= $website_url; ?></a>
+                    <a href="<?= $website_url; ?>" title="<?= $title_url; ?>" target="_blank"><?= $website_url; ?></a>
+                    <br><br>
                 <?php endif; ?>
      
                 <?php if($github_link) : ?>
                     <h5>Github link:</h5>
-                    <a href="<?= $github_link; ?>" title="<?= $title_url; ?>"><?= $github_link; ?></a>
+                    <a href="<?= $github_link; ?>" title="<?= $title_url; ?>" target="_blank"><?= $github_link; ?></a>
                 <?php endif; ?>
                 <br><br>
                 <?php the_content(); ?>   

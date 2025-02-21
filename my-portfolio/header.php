@@ -6,7 +6,7 @@
     <meta property="og:title" content="<?php the_title(); ?>">
     <meta property="og:description" content="<?php bloginfo( 'description' ); ?>">
    
-    <meta property="og:url" content="<?php echo esc_url( home_url( '/' ) ); ?>">
+    <meta property="og:url" content="<?php echo esc_url( network_home_url('/' ) ); ?>">
     <meta property="og:type" content="website">
     <?php 
     /* 
