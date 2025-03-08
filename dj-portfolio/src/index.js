@@ -1,0 +1,1 @@
+import './styles/_main.scss'; // Import the SCSS file for global styles

@@ -1,0 +1,12 @@
+  {
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "settings": {
+      "color": {
+        "palette": [
+          { "name": "Primary", "slug": "primary", "color": "#00000000" },
+          { "name": "Accent", "slug": "accent", "color": "#ffffff" }
+        ]
+      }
+    }
+  }   

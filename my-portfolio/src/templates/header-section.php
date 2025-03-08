@@ -18,12 +18,12 @@
 						<?php
 						$main_menu = array(
 									'theme_location' => 'main',
-									'container' => 'ul',
-									'container_id' => 'header-nav-bar',
+									'container' => false,
+									'menu_id' => 'menu-main',
 									'container_class' => 'navbar-nav ml-auto',
 									'menu_class' => 'navbar-nav w-100 d-flex justify-content-start align-items-center',
-									'depth' => 0,
-									'fallback_cb' => true
+									'depth' => 2,
+									'fallback_cb' => '__return_false'
 						);
 
 						wp_nav_menu($main_menu);
